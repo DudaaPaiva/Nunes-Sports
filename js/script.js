@@ -1,4 +1,4 @@
-// Validate form inputs before submiting data
+// Validar entradas do formulario antes de entrar os dados 
 function validateForm(){
     const name = document.getElementById("name").value;
     const productCode = document.getElementById("productCode").value;
@@ -33,7 +33,7 @@ function validateForm(){
 }
 
 
-//function to show Data 
+//função para exibir os dados 
 function showData(){
     let productList;
     if(localStorage.getItem("productList") == null){
@@ -65,13 +65,13 @@ function showData(){
     document.querySelector("#crudTable tbody").innerHTML = html;
 }
 
-// Loads All data from Local Storage when document or page loaded
+// Carrega todos os dados do Local Storage quando a página é carregada
 document.onload = showData();
 
-// functon to add data to Local Storage
+// Função para adicionar dados ao Local Storage
 
 function AddData(){
-    // if form is validate
+    // se o formulário estiver validado
   if(validateForm() === true){
     const name = document.getElementById("name").value;
     const productCode = document.getElementById("productCode").value;
@@ -103,6 +103,7 @@ function AddData(){
 
 // function to Delete Data from Local Storage
 function deleteData(index){
+    if(window.confirm("Tem certeza de que deseja excluir este item")){
     var productList;
     if (localStorage.getItem("productList") == null){
         productList = [];
@@ -113,11 +114,12 @@ function deleteData(index){
     productList.splice(index, 1);
     localStorage.setItem("productList", JSON.stringify(productList));
     showData();
+    }
 }
 
-//function to update/edit data in local Storage
+//Função para editar/atualizar dados no local Storage
 function updateData(index){
-    // Submit button will hide and Update will show for updating of Data in local storage
+    // O botão 'cadastrar' será oculto e aparecerá o botão 'salvar' para atualizar os dados 
     document.getElementById("Submit").style.display = "none";
     document.getElementById("Update").style.display = "block";
 
@@ -149,7 +151,7 @@ function updateData(index){
             document.getElementById("description").value = "";
             document.getElementById("price").value = "";
 
-            // Update button will hide and Submit button will show 
+            // O botão de atualizar ficará oculto e e o botão de envio será mostrado
             document.getElementById("Submit").style.display = "block";
             document.getElementById("Update").style.display = "none";            
         }
